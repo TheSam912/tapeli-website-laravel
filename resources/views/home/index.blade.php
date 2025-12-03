@@ -1,0 +1,11 @@
+@extends('home.home_master')
+@section('home')
+@endsection
+@include('home.homelayout.slider')
+@include('home.homelayout.features')
+@include('home.homelayout.clarifies')
+@include('home.homelayout.get_all')
+@include('home.homelayout.usability')
+@include('home.homelayout.testimonial')
+@include('home.homelayout.questions')
+@include('home.homelayout.apps')

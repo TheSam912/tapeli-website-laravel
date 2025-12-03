@@ -1,11 +1,12 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\backend\ReviewController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home.index');
 });
 
 Route::get('/dashboard', function () {
@@ -29,4 +30,12 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [AdminController::class, 'AdminProfile'])->name('admin.profile');
     Route::post('/profile/store', [AdminController::class, 'ProfileStore'])->name('profile.store');
     Route::post('/admin/password/update', [AdminController::class, 'PasswordUpdate'])->name('admin.password.update');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(ReviewController::class)->group(
+        function () {
+            Route::get('all/review', 'AllReviews')->name('all.reviews');
+        }
+    );
 });
