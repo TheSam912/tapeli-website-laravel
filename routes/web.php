@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\ReviewController;
+use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -35,12 +36,20 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::controller(ReviewController::class)->group(
         function () {
-            Route::get('all/review', 'AllReviews')->name('all.reviews');
-            Route::get('add/review', 'AddReview')->name('add.review');
-            Route::post('store/review', 'StoreReview')->name('store.review');
-            Route::get('edit/review/{id}', 'EditReview')->name('edit.review');
-            Route::post('update/review', 'UpdateReview')->name('update.review');
-            Route::get('delete/review/{id}', 'DeleteReview')->name('delete.review');
+            Route::get('/all/review', 'AllReviews')->name('all.reviews');
+            Route::get('/add/review', 'AddReview')->name('add.review');
+            Route::post('/store/review', 'StoreReview')->name('store.review');
+            Route::get('/edit/review/{id}', 'EditReview')->name('edit.review');
+            Route::post('/update/review', 'UpdateReview')->name('update.review');
+            Route::get('/delete/review/{id}', 'DeleteReview')->name('delete.review');
+        }
+    );
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(SliderController::class)->group(
+        function () {
+            Route::get('/get/slider', 'GetSlider')->name('get.slider');
         }
     );
 });
