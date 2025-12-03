@@ -54,4 +54,49 @@ class ReviewController extends Controller
 
         return redirect()->route('all.reviews')->with($notification);
     }
+
+    public function EditReview($id)
+    {
+        $review = Review::find($id);
+
+        return view('admin.backend.review.edit_review', compact('review'));
+    }
+
+    public function UpdateReview(Request $request)
+    {
+
+        $rev_id = $request->id;
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'position' => 'required|string|max:255',
+            'message' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
+
+        Review::find($rev_id)->update([
+            'name' => $request->input('name'),
+            'position' => $request->input('position'),
+            'message' => $request->input('message'),
+        ]);
+
+        $notification = [
+            'message' => 'Review updated successfully !',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->route('all.reviews')->with($notification);
+    }
+
+    public function DeleteReview($id)
+    {
+        $review = Review::find($id);
+        $review->delete();
+        $notification = [
+            'message' => 'Review deleted successfully !',
+            'alert-type' => 'success',
+        ];
+
+        return redirect()->route('all.reviews')->with($notification);
+    }
 }
