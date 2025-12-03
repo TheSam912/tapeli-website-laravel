@@ -36,6 +36,8 @@ Route::middleware('auth')->group(function () {
     Route::controller(ReviewController::class)->group(
         function () {
             Route::get('all/review', 'AllReviews')->name('all.reviews');
+            Route::get('add/review', 'AddReview')->name('add.review');
+            Route::post('store/review', 'StoreReview')->name('store.review');
         }
     );
 });

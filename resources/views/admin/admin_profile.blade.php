@@ -764,8 +764,9 @@
                                                             <div class="form-group mb-3 row">
                                                                 <label class="form-label">Address</label>
                                                                 <div class="col-lg-12 col-xl-12">
-                                                                    <input class="form-control" type="text" name="address"
-                                                                        value="{{ $profileData->address }}">
+                                                                    <textarea class="form-control" type="text"
+                                                                        name="address"
+                                                                        value="{{ $profileData->address }}"></textarea>
                                                                 </div>
                                                             </div>
                                                             <div class="form-group mb-3 row">

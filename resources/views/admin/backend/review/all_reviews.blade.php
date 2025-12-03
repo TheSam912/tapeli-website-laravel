@@ -52,14 +52,17 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($review as $key => $item)
+                                        @foreach ($reviews as $key => $item)
                                             <tr>
                                                 <td>{{ $key + 1 }}</td>
                                                 <td>{{ $item->name }}</td>
                                                 <td>{{ $item->position }}</td>
                                                 <td><img src="{{ $item->image }}" style="width: 70px; height: 40px;"></td>
                                                 <td>{{ $item->message }}</td>
-                                                <td>$110,000</td>
+                                                <td>
+                                                    <a href="" class="btn btn-success btn-sm">Edit</a>
+                                                    <a href="" class="btn btn-danger btn-sm">Delete</a>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
