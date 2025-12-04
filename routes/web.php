@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\backend\featuresController;
 use App\Http\Controllers\backend\ReviewController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\ProfileController;
@@ -50,6 +51,19 @@ Route::middleware('auth')->group(function () {
     Route::controller(SliderController::class)->group(
         function () {
             Route::get('/get/slider', 'GetSlider')->name('get.slider');
+        }
+    );
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(featuresController::class)->group(
+        function () {
+            Route::get('/all/features', 'AllFeatures')->name('all.feature');
+            Route::get('/add/features', 'AddFeature')->name('add.feature');
+            Route::post('/store/features', 'StoreFeatures')->name('store.feature');
+            Route::get('/edit/features/{id}', 'EditFeatures')->name('edit.feature');
+            Route::post('/update/feature', 'UpdateFeature')->name('update.feature');
+            Route::get('/delete/feature/{id}', 'DeleteFeature')->name('delete.feature');
         }
     );
 });
