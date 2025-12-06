@@ -7,13 +7,13 @@
                     <p class="text">Track your daily finances automatically. Manage your money in a friendly &
                         flexible way, making it easy to spend guilt-free.</p>
                     <div class="mt-50" data-aos="fade-up" data-aos-duration="900">
-                        <a href="sign-up.html" class="lonyo-default-btn hero-btn">Create a free account</a>
+                        <a href="sign-up.html" class="lonyo-default-btn hero-btn">Contact Us</a>
                     </div>
                 </div>
             </div>
             <div class="col-lg-5">
                 <div class="lonyo-hero-thumb" data-aos="fade-left" data-aos-duration="700">
-                    <img src="{{ asset('frontend/assets/images/v1/hero-thumb.png') }}" alt="">
+                    <img src="{{ asset('frontend/assets/images/slider.png') }}" alt="">
                     <div class="lonyo-hero-shape">
                         <img src="{{ asset('frontend/assets/images/shape/hero-shape1.svg') }}" alt="">
                     </div>
