@@ -94,6 +94,25 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#usablitymenu" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Usability Setup</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="usablitymenu">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.usability') }}" class="tp-link">All Usability</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('add.usability') }}" class="tp-link">Add Usability</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
                         <i data-feather="alert-octagon"></i>
                         <span> Error Pages </span>

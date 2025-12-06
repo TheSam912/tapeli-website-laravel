@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\featuresController;
 use App\Http\Controllers\backend\ReviewController;
 use App\Http\Controllers\backend\SliderController;
+use App\Http\Controllers\backend\UsabilityController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -64,6 +65,19 @@ Route::middleware('auth')->group(function () {
             Route::get('/edit/features/{id}', 'EditFeatures')->name('edit.feature');
             Route::post('/update/feature', 'UpdateFeature')->name('update.feature');
             Route::get('/delete/feature/{id}', 'DeleteFeature')->name('delete.feature');
+        }
+    );
+});
+
+Route::middleware('auth')->group(function () {
+    Route::controller(UsabilityController::class)->group(
+        function () {
+            Route::get('/all/usability', 'AllUsability')->name('all.usability');
+            Route::get('/add/usability', 'AddUsability')->name('add.usability');
+            Route::post('/store/usability', 'StoreUsability')->name('store.usability');
+            Route::get('/edit/usability/{id}', 'EditUsability')->name('edit.usability');
+            Route::post('/update/usability', 'UpdateUsability')->name('update.usability');
+            Route::get('/delete/usability/{id}', 'DeleteUsability')->name('delete.usability');
         }
     );
 });

@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-5 order-lg-2">
                 <div class="lonyo-content-thumb" data-aos="fade-up" data-aos-duration="700">
-                    <img src="{{ asset('frontend/assets/images/v1/content-thumb2.png') }}" alt="">
+                    <img src="{{ asset('frontend/assets/images/fanancial.png') }}" alt="">
                 </div>
             </div>
             <div class="col-lg-7 d-flex align-items-center">

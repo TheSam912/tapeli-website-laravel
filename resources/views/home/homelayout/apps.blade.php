@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-6">
                 <div class="lonyo-cta-thumb" data-aos="fade-up" data-aos-duration="500">
-                    <img src="{{ asset('frontend/assets/images/v1/cta-thumb.png') }}" alt="">
+                    <img src="{{ asset('frontend/assets/images/apps.png') }}" alt="">
                 </div>
             </div>
             <div class="col-lg-6">
