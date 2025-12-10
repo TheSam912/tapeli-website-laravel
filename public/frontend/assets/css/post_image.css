@@ -1,0 +1,17 @@
+ .image-preview-wrapper {
+     width: 200px;
+     height: 200px;
+     margin: 0 auto;
+ }
+
+ .image-preview {
+     width: 100%;
+     height: 100%;
+     object-fit: cover;
+     border-radius: 10px;
+ }
+
+ .card-body-scrollable {
+     max-height: 80vh;
+     overflow-y: auto;
+ }

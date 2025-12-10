@@ -1,45 +1,70 @@
 @extends('admin.admin_master')
 <link rel="stylesheet" href="{{ asset('frontend/assets/css/user_dropdown.css') }}">
+<link rel="stylesheet" href="{{ asset('frontend/assets/css/post_image.css') }}">
 @section('admin')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const selectWrapper = document.getElementById('authorSelect');
-            const dropdown = document.getElementById('authorDropdown');
-            const nameInput = document.getElementById('author_name');
-            const idInput = document.getElementById('author_id');
-
-            if (!selectWrapper || !dropdown || !nameInput || !idInput) {
-                return; // safety check
-            }
-
-            // Toggle dropdown when clicking on the visible input
-            nameInput.addEventListener('click', function () {
-                const isVisible = dropdown.style.display === 'block';
-                dropdown.style.display = isVisible ? 'none' : 'block';
-            });
-
-            // Handle option click
-            document.querySelectorAll('.author-option').forEach(function (item) {
-                item.addEventListener('click', function () {
-                    const id = this.getAttribute('data-id');
-                    const name = this.getAttribute('data-name');
-
-                    idInput.value = id;       // hidden input -> sent in form
-                    nameInput.value = name;   // display name
-
-                    dropdown.style.display = 'none';
-                });
-            });
-
-            // Close dropdown when clicking outside
-            document.addEventListener('click', function (e) {
-                if (!selectWrapper.contains(e.target)) {
-                    dropdown.style.display = 'none';
-                }
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#image').on('change', function (e) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    $('#showImage').attr('src', event.target.result);
+                };
+                reader.readAsDataURL(e.target.files[0]);
             });
         });
     </script>
+    <script>
+        (function () {
+            const input = document.getElementById('image_url');
+            const preview = document.getElementById('showImage');
+            const defaultSrc = "{{ url('upload/no_image.jpg') }}";
+
+            if (!input || !preview) return;
+
+            input.addEventListener('input', function (e) {
+                const url = e.target.value.trim();
+
+                if (url) {
+                    preview.src = url;
+                } else {
+                    preview.src = defaultSrc;
+                }
+            });
+        })();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('image_url');   // URL text input
+            const preview = document.getElementById('showImage'); // <img>
+            const defaultSrc = "{{ url('upload/no_image.jpg') }}";
+
+            if (!input || !preview) {
+                // Elements not found; avoid silent failure
+                return;
+            }
+
+            function updatePreview() {
+                const url = input.value.trim();
+
+                if (url) {
+                    // If image fails to load (bad URL, blocked, etc.), reset to default
+                    preview.onerror = function () {
+                        this.onerror = null;         // avoid loop
+                        this.src = defaultSrc;
+                    };
+                    preview.src = url;
+                } else {
+                    preview.src = defaultSrc;
+                }
+            }
+
+            // For typing, pasting, and when field loses focus
+            input.addEventListener('input', updatePreview);
+            input.addEventListener('change', updatePreview);
+        });
+    </script>
+
     <div class="content">
 
         <!-- Start Content-->
@@ -70,7 +95,26 @@
                                             <form action="{{ route('store.post') }}" method="post"
                                                 enctype="multipart/form-data">
                                                 @csrf
-                                                <div class="card-body">
+                                                <div class="card-body card-body-scrollable">
+                                                    <div class="col-lg-12 col-xl-12 mb-3">
+                                                        <div class="image-preview-wrapper">
+                                                            <img id="showImage" src="{{ !empty($postData?->cover_image)
+        ? $postData->cover_image
+        : url('upload/no_image.jpg')      
+                                }}" alt="cover image" class="image-preview img-thumbnail">
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Image Cover (URL)</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <input class="form-control" type="text" name="cover_image"
+                                                                id="image_url" placeholder="https://example.com/image.jpg"
+                                                                value="{{ old('cover_image', $postData->cover_image ?? '') }}">
+                                                        </div>
+                                                    </div>
+
+
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Title</label>
                                                         <div class="col-lg-12 col-xl-12">

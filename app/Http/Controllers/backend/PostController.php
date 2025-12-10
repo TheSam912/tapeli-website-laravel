@@ -19,16 +19,16 @@ class PostController extends Controller
 
     public function AddPost()
     {
-        // Load users for the author dropdown
         $users = User::orderBy('name')->get();
+        $postData = null;
 
-        return view('admin.backend.posts.add_post', compact('users'));
+        return view('admin.backend.posts.add_post', compact('users', 'postData'));
     }
 
     public function StorePost(Request $request)
     {
         $validated = $request->validate([
-            'cover_image' => 'nullable|string|max:255',
+            'cover_image' => 'nullable|url|max:255',
             'title' => 'required|string|max:255',
             'description' => 'required|string',
             'author_id' => 'required|exists:users,id',
@@ -37,20 +37,18 @@ class PostController extends Controller
 
         Post::create($validated);
 
-        $notification = [
+        return redirect()->route('all.posts')->with([
             'message' => 'Post inserted successfully !',
             'alert-type' => 'success',
-        ];
-
-        return redirect()->route('all.posts')->with($notification);
+        ]);
     }
 
     public function EditPosts($id)
     {
-        $post = Post::findOrFail($id);
-        $users = User::orderBy('name')->get();
+        $posts = Post::orderBy('title')->get();
+        $postData = Post::findOrFail($id);
 
-        return view('admin.backend.posts.edit_post', compact('post', 'users'));
+        return view('admin.backend.posts.add_post', compact('posts', 'postData'));
     }
 
     public function UpdatePost(Request $request)
