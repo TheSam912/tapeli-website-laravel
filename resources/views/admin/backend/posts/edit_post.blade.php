@@ -1,6 +1,69 @@
 @extends('admin.admin_master')
 @section('admin')
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/post_image.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/user_dropdown.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#image').on('change', function (e) {
+                var reader = new FileReader();
+                reader.onload = function (event) {
+                    $('#showImage').attr('src', event.target.result);
+                };
+                reader.readAsDataURL(e.target.files[0]);
+            });
+        });
+    </script>
+    <script>
+        (function () {
+            const input = document.getElementById('image_url');
+            const preview = document.getElementById('showImage');
+            const defaultSrc = "{{ url('upload/no_image.jpg') }}";
+
+            if (!input || !preview) return;
+
+            input.addEventListener('input', function (e) {
+                const url = e.target.value.trim();
+
+                if (url) {
+                    preview.src = url;
+                } else {
+                    preview.src = defaultSrc;
+                }
+            });
+        })();
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const input = document.getElementById('image_url');   // URL text input
+            const preview = document.getElementById('showImage'); // <img>
+            const defaultSrc = "{{ url('upload/no_image.jpg') }}";
+
+            if (!input || !preview) {
+                // Elements not found; avoid silent failure
+                return;
+            }
+
+            function updatePreview() {
+                const url = input.value.trim();
+
+                if (url) {
+                    // If image fails to load (bad URL, blocked, etc.), reset to default
+                    preview.onerror = function () {
+                        this.onerror = null;         // avoid loop
+                        this.src = defaultSrc;
+                    };
+                    preview.src = url;
+                } else {
+                    preview.src = defaultSrc;
+                }
+            }
+
+            // For typing, pasting, and when field loses focus
+            input.addEventListener('input', updatePreview);
+            input.addEventListener('change', updatePreview);
+        });
+    </script>
     <div class="content">
 
         <!-- Start Content-->
@@ -34,6 +97,23 @@
 
                                                 <input type="hidden" name="id" value="{{ $post->id }}">
                                                 <div class="card-body">
+                                                    <div class="col-lg-12 col-xl-12 mb-3">
+                                                        <div class="image-preview-wrapper">
+                                                            <img id="showImage" src="{{ !empty($post?->cover_image)
+        ? $post->cover_image
+        : url('upload/no_image.jpg')      
+                                                                            }}" alt="cover image"
+                                                                class="image-preview img-thumbnail">
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group mb-3 row">
+                                                        <label class="form-label">Image Cover (URL)</label>
+                                                        <div class="col-lg-12 col-xl-12">
+                                                            <input class="form-control" type="text" name="cover_image"
+                                                                id="image_url" placeholder="https://example.com/image.jpg"
+                                                                value="{{ old('cover_image', $post->cover_image ?? '') }}">
+                                                        </div>
+                                                    </div>
                                                     <div class="form-group mb-3 row">
                                                         <label class="form-label">Title</label>
                                                         <div class="col-lg-12 col-xl-12">
@@ -49,12 +129,11 @@
                                                                 value="{{ $post->description }}">
                                                         </div>
                                                     </div>
-
                                                     <div class="form-group mb-3 row">
-                                                        <label class="form-label">Icon</label>
+                                                        <label class="form-label">read_time</label>
                                                         <div class="col-lg-12 col-xl-12">
-                                                            <textarea class="form-control" type="text"
-                                                                name="icon">{{ $post->icon }}</textarea>
+                                                            <input class="form-control" type="text" name="read_time"
+                                                                value="{{ $post->read_time }}">
                                                         </div>
                                                     </div>
                                                     <div class="pt-4">

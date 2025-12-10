@@ -45,10 +45,10 @@ class PostController extends Controller
 
     public function EditPosts($id)
     {
-        $posts = Post::orderBy('title')->get();
-        $postData = Post::findOrFail($id);
+        $users = User::orderBy('name')->get();
+        $post = Post::findOrFail($id);
 
-        return view('admin.backend.posts.add_post', compact('posts', 'postData'));
+        return view('admin.backend.posts.edit_post', compact('users', 'post'));
     }
 
     public function UpdatePost(Request $request)
