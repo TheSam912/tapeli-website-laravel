@@ -35,36 +35,42 @@
     </script>
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            const input = document.getElementById('image_url');   // URL text input
-            const preview = document.getElementById('showImage'); // <img>
-            const defaultSrc = "{{ url('upload/no_image.jpg') }}";
+            const selectWrapper = document.getElementById('authorSelect');
+            const dropdown = document.getElementById('authorDropdown');
+            const nameInput = document.getElementById('author_name');
+            const idInput = document.getElementById('author_id');
 
-            if (!input || !preview) {
-                // Elements not found; avoid silent failure
-                return;
+            if (!selectWrapper || !dropdown || !nameInput || !idInput) {
+                return; // safety check
             }
 
-            function updatePreview() {
-                const url = input.value.trim();
+            // Toggle dropdown when clicking on the visible input
+            nameInput.addEventListener('click', function () {
+                const isVisible = dropdown.style.display === 'block';
+                dropdown.style.display = isVisible ? 'none' : 'block';
+            });
 
-                if (url) {
-                    // If image fails to load (bad URL, blocked, etc.), reset to default
-                    preview.onerror = function () {
-                        this.onerror = null;         // avoid loop
-                        this.src = defaultSrc;
-                    };
-                    preview.src = url;
-                } else {
-                    preview.src = defaultSrc;
+            // Handle option click
+            document.querySelectorAll('.author-option').forEach(function (item) {
+                item.addEventListener('click', function () {
+                    const id = this.getAttribute('data-id');
+                    const name = this.getAttribute('data-name');
+
+                    idInput.value = id;       // hidden input -> sent in form
+                    nameInput.value = name;   // display name
+
+                    dropdown.style.display = 'none';
+                });
+            });
+
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function (e) {
+                if (!selectWrapper.contains(e.target)) {
+                    dropdown.style.display = 'none';
                 }
-            }
-
-            // For typing, pasting, and when field loses focus
-            input.addEventListener('input', updatePreview);
-            input.addEventListener('change', updatePreview);
+            });
         });
     </script>
-
     <div class="content">
 
         <!-- Start Content-->

@@ -1,7 +1,7 @@
 @extends('admin.admin_master')
 @section('admin')
-    <link rel="stylesheet" href="{{ asset('frontend/assets/css/post_image.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/user_dropdown.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/post_image.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(document).ready(function () {
@@ -102,7 +102,7 @@
                                                             <img id="showImage" src="{{ !empty($post?->cover_image)
         ? $post->cover_image
         : url('upload/no_image.jpg')      
-                                                                            }}" alt="cover image"
+                                                                                        }}" alt="cover image"
                                                                 class="image-preview img-thumbnail">
                                                         </div>
                                                     </div>
