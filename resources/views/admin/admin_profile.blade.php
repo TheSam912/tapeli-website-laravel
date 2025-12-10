@@ -705,6 +705,8 @@
                                         </div>
                                     </div>
                                 </div> <!-- end education -->
+
+                                {{-- settings start --}}
                                 <div class="tab-pane pt-4" id="profile_setting" role="tabpanel">
                                     <div class="row">
 
@@ -859,6 +861,7 @@
                                         </div>
                                     </div>
                                 </div>
+                                {{-- settings end --}}
                             </div>
                         </div>
                     </div> <!-- Tab panes -->

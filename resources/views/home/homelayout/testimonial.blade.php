@@ -37,7 +37,4 @@
             </div>
         @endforeach
     </div>
-    <div class="lonyo-t-overlay2">
-        <img src="{{ asset('upload/assets/images/v2/overlay.png') }}" alt="">
-    </div>
 </div>

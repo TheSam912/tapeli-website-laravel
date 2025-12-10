@@ -7,5 +7,6 @@
 @include('home.homelayout.get_all')
 @include('home.homelayout.usability')
 @include('home.homelayout.testimonial')
+@include('home.homelayout.posts')
 @include('home.homelayout.questions')
 @include('home.homelayout.apps')

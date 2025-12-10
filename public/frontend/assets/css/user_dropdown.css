@@ -1,0 +1,30 @@
+.author-select {
+    position: relative;
+}
+
+.author-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 220px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 0 0 6px 6px;
+    z-index: 999;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: none; /* important: hidden until click */
+}
+
+.author-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.author-option:hover {
+    background: #f1f5f9;
+}

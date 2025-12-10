@@ -2,10 +2,12 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\backend\featuresController;
+use App\Http\Controllers\backend\PostController;
 use App\Http\Controllers\backend\ReviewController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\UsabilityController;
 use App\Http\Controllers\ProfileController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -81,3 +83,23 @@ Route::middleware('auth')->group(function () {
         }
     );
 });
+
+Route::middleware('auth')->group(function () {
+    Route::controller(PostController::class)->group(
+        function () {
+            Route::get('/all/posts', 'AllPosts')->name('all.posts');
+            Route::get('/add/post', 'AddPost')->name('add.post');
+            Route::post('/store/post', 'StorePost')->name('store.post');
+            Route::get('/edit/posts/{id}', 'EditPosts')->name('edit.posts');
+            Route::post('/update/post', 'UpdatePost')->name('update.post');
+            Route::get('/delete/post/{id}', 'DeletePost')->name('delete.post');
+        }
+    );
+});
+
+Route::get('/all-posts', function () {
+    $posts = Post::latest()->get();
+
+    // 👇 change this to your real view name if it's different
+    return view('home.pages.all_posts', compact('posts'));
+})->name('all.posts.page');

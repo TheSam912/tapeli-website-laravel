@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/aos.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/niceselect.css') }}">
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/animate.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/posts.css') }}">
 
 
 

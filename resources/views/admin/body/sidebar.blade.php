@@ -113,6 +113,25 @@
                     </div>
                 </li>
                 <li>
+                    <a href="#postmenu" data-bs-toggle="collapse">
+                        <i data-feather="alert-octagon"></i>
+                        <span> Posts Setup</span>
+                        <span class="menu-arrow"></span>
+                    </a>
+                    <div class="collapse" id="postmenu">
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('all.posts') }}" class="tp-link">All Posts</a>
+                            </li>
+                        </ul>
+                        <ul class="nav-second-level">
+                            <li>
+                                <a href="{{ route('add.post') }}" class="tp-link">Add Post</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
                     <a href="#sidebarError" data-bs-toggle="collapse">
                         <i data-feather="alert-octagon"></i>
                         <span> Error Pages </span>
